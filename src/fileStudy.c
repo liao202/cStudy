@@ -1,3 +1,4 @@
+
 /*
  * fileStudy.c
  *
@@ -49,5 +50,3 @@ int main3(void){
 	printf("done!");
 	return 1;
 }
-
-

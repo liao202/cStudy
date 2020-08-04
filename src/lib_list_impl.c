@@ -1,3 +1,4 @@
+
 /*
  * lib_list_impl.c
  *
@@ -29,4 +30,5 @@
 //char * deleteManager(char obj[], Manager manager[]) {
 //	return NULL;
 //}
+
 

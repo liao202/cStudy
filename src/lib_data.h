@@ -1,3 +1,9 @@
+
+
+//LibData libData;
+
+#endif /* LIB_DATA_H_ */
+=======
 /*
  * lib_data.h
  *
@@ -16,6 +22,7 @@
 //} LibData;
 
 typedef  struct SBookLinkNode{
+	struct SBookLinkNode *head ;
 	Book *data ;
 	struct SBookLinkNode *next ;
 }BookLinkNode;
@@ -56,7 +63,3 @@ typedef struct{
 
 
 
-
-//LibData libData;
-
-#endif /* LIB_DATA_H_ */

@@ -1,9 +1,4 @@
 
-
-//LibData libData;
-
-#endif /* LIB_DATA_H_ */
-=======
 /*
  * lib_data.h
  *
@@ -60,6 +55,6 @@ typedef struct{
 	ReaderBookRefLinkNode *readerBookRefLinkNode;
 	BorrowFlowLinkNode *borrowFlowLinkNode;
 }GlobalLibData;
-
+#endif
 
 

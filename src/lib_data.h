@@ -17,7 +17,6 @@
 //} LibData;
 
 typedef  struct SBookLinkNode{
-	struct SBookLinkNode *head ;
 	Book *data ;
 	struct SBookLinkNode *next ;
 }BookLinkNode;

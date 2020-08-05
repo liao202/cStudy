@@ -16,15 +16,6 @@
 GlobalLibData GLOBAL_LIB_DATA;
 GlobalLibData *PGLOBAL_LIB_DATA =NULL;
 
-BookLinkNode * testGetBook(){
-	Book *book = (Book *)malloc(sizeof(Book));
-	strcpy(book->id, "000");
-	BookLinkNode *bl = (BookLinkNode *)malloc(sizeof(BookLinkNode));
-	bl->data = book;
-	printf("inner bk:%d\n",book);
-	printf("inner:%d\n",bl);
-	return  bl;
-}
 
 
 int main(void){
@@ -73,6 +64,8 @@ int main(void){
 
 	showBooks();
 
+	showReaders();
+
 	printf("\n***********END***********\n");
 
 
@@ -95,10 +88,29 @@ GlobalLibData * getLibData(){
 	bookLinkNode->next = NULL;
 	GLOBAL_LIB_DATA.bookLinkNode = bookLinkNode;
 
-	GLOBAL_LIB_DATA.borrowFlowLinkNode = NULL;
-	GLOBAL_LIB_DATA.managerLinkNode = NULL;
-	GLOBAL_LIB_DATA.readerBookRefLinkNode = NULL;
-	GLOBAL_LIB_DATA.readerLinkNode = NULL;
+	ReaderLinkNode *readerLinkNode = (ReaderLinkNode *)malloc(sizeof(ReaderLinkNode));
+//	bookLinkNode.head = NULL;
+	readerLinkNode->data =NULL;
+	readerLinkNode->next = NULL;
+	GLOBAL_LIB_DATA.readerLinkNode = readerLinkNode;
+
+
+	BorrowFlowLinkNode *borrowFlowLinkNode = (BorrowFlowLinkNode *)malloc(sizeof(BorrowFlowLinkNode));
+	borrowFlowLinkNode->data =NULL;
+	borrowFlowLinkNode->next = NULL;
+	GLOBAL_LIB_DATA.borrowFlowLinkNode = borrowFlowLinkNode;
+
+
+	ManagerLinkNode *managerLinkNode = (ManagerLinkNode *)malloc(sizeof(ManagerLinkNode));
+	managerLinkNode->data =NULL;
+	managerLinkNode->next = NULL;
+	GLOBAL_LIB_DATA.managerLinkNode = managerLinkNode;
+
+	ReaderBookRefLinkNode *readerBookRefLinkNode = (ReaderBookRefLinkNode *)malloc(sizeof(ReaderBookRefLinkNode));
+	readerBookRefLinkNode->data =NULL;
+	readerBookRefLinkNode->next = NULL;
+	GLOBAL_LIB_DATA.readerBookRefLinkNode = readerBookRefLinkNode;
+
 
 	PGLOBAL_LIB_DATA = &GLOBAL_LIB_DATA;
 	return PGLOBAL_LIB_DATA;

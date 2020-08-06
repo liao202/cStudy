@@ -38,6 +38,7 @@ typedef struct Manager{
 typedef struct Book{
   char id[20];
   char title[50];
+  int bStatus;//0,在库，1，借出
 } Book;
 
 /**

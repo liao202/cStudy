@@ -15,7 +15,7 @@ void borrow(const char rId[20], const char bId[20]) {
 
 	//增加流水
 	GlobalLibData *libData = getLibData();
-	BorrowFlow *borrowFlow = (BorrowFlow) malloc(sizeof(BorrowFlow));
+	BorrowFlow *borrowFlow = (BorrowFlow *) malloc(sizeof(BorrowFlow));
 
 	strcpy(borrowFlow->rId, rId);
 	strcpy(borrowFlow->bId, bId);
@@ -39,16 +39,19 @@ void borrow(const char rId[20], const char bId[20]) {
 				pTailLinkNode->data->rId, libData->borrowFlowLinkNode->data->rId);
 	}
 	//减少图书(修改图书状态)
-
 	BookLinkNode *bookLinkNode = libData->bookLinkNode;
 
-	BookLinkNode *preBookLinkNode = libData->bookLinkNode;
 	while(bookLinkNode->data!=NULL){
 		if(strcmp(bookLinkNode->data->id,bId)==0){
-			preBookLinkNode->next=bookLinkNode->next;
-			break;
+			if(bookLinkNode->data->bStatus!=0){
+				printf("图书已经借出，请选择其他图书!%s,%d\n",bookLinkNode->data->id,bookLinkNode->data->bStatus);
+				break;
+			}else{
+				bookLinkNode->data->bStatus = 1;
+				printf("借书成功!%s,%d\n",bookLinkNode->data->id,bookLinkNode->data->bStatus);
+				break;
+			}
 		}else{
-			preBookLinkNode =  bookLinkNode;
 			bookLinkNode = bookLinkNode->next;
 		}
 	}
@@ -97,7 +100,7 @@ void addBook(const char bId[], const char bTitle[]) {
 	Book *book = (Book *) malloc(sizeof(Book));
 	strcpy(book->id, bId);
 	strcpy(book->title, bTitle);
-
+	book->bStatus=0;
 	BookLinkNode *pNewBookLinkNode = (BookLinkNode *) malloc(
 			sizeof(BookLinkNode));
 
@@ -124,7 +127,7 @@ void showBooks() {
 //	int i=0;
 	while (bookLinkNode != NULL) {
 		Book *book = bookLinkNode->data;
-		printf("---book name:%s,id:%s\n", book->title, book->id);
+		printf("---book name:%s,id:%s,bStatus:%d\n", book->title, book->id,book->bStatus);
 		bookLinkNode = bookLinkNode->next;
 	}
 }
@@ -151,5 +154,13 @@ void showAllBorrowRef() {
 }
 
 void showAllBorrowFlows() {
+	GlobalLibData *libData = getLibData();
+	BorrowFlowLinkNode *borrowFlowLinkNode = libData->borrowFlowLinkNode;
+	//	int i=0;
+		while (borrowFlowLinkNode != NULL) {
+			BorrowFlow *borrowFlow = borrowFlowLinkNode->data;
+			printf("---bId:%s,rId:%s\n", borrowFlow->bId, borrowFlow->rId);
+			borrowFlowLinkNode = borrowFlowLinkNode->next;
+		}
 }
 
